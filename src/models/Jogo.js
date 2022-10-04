@@ -6,7 +6,7 @@ const JogoSchema = new mongooose.Schema({
   foto: { type: String, required: true },
   preco: { type: Number, required: true },
   genero: { type: String, required: true },
-  disribuidora: { type: String, required: true },
+  distribuidora: { type: String, required: true },
 });
 const Jogo = mongooose.model('jogos', JogoSchema);
 
