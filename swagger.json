@@ -1,0 +1,315 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API PS Store",
+    "description": "API para CRUD de games e carrinho de compras",
+    "termsOfService": "",
+    "contact": "ccardoso210@gmail.com",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001/jogos"
+    }
+  ],
+  "paths": {
+    "/all-jogos": {
+      "get": {
+        "summary": "Lista de todas os jogos",
+        "description": "Rota responsável por listar todas os jogos",
+        "tags": ["Jogos"],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Jogos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/one-jogo/{id}": {
+      "get": {
+        "summary": "Busca um jogo pelo ID",
+        "description": "Rota responsável por buscar um jogo pelo ID",
+        "tags": ["Jogos"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do jogo para a busca",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogos"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create-jogo": {
+      "post": {
+        "summary": "Cadastrar um jogo",
+        "description": "Rota responsável por cadastrar um jogo",
+        "tags": ["Jogos"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Jogos"
+              },
+              "examples": {
+                "Jogos": {
+                  "value": {
+                    "titulo": "God Of War Ragnarok",
+                    "descricao": "Junte-se a Kratos e Atreus em uma jornada mítica à procura de respostas na iminência do Ragnarök. Juntos, pai e filho arriscarão tudo viajando por cada um dos Nove Reinos.",
+                    "foto": "assets/images/god-of-war-ragnarok.jpg",
+                    "preco": 299.99,
+                    "genero": "Ação/Fantasia",
+                    "distribuidora": "Sony"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogos"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/update-jogo/{id}": {
+      "put": {
+        "summary": "Editar um jogo pelo ID",
+        "description": "Rota responsável por editar um jogo pelo ID",
+        "tags": ["Jogos"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do jogo para a busca",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Jogos"
+              },
+              "examples": {
+                "Jogos": {
+                  "value": {
+                    "titulo": "God Of War Ragnarok Editado",
+                    "descricao": "Junte-se a Kratos e Atreus em uma jornada mítica à procura de respostas na iminência do Ragnarök. Juntos, pai e filho arriscarão tudo viajando por cada um dos Nove Reinos.",
+                    "foto": "assets/images/god-of-war-ragnarok.jpg",
+                    "preco": 299.99,
+                    "genero": "Ação/Fantasia",
+                    "distribuidora": "Sony"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Jogos"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/delete-jogo/{id}": {
+      "delete": {
+        "summary": "Apagar um jogo pelo ID",
+        "description": "Rota responsável por apagar um jogo pelo ID",
+        "tags": ["Jogos"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do jogo para deleção",
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/all-carrinho": {
+      "get": {
+        "summary": "Lista de todos os itens do carrinho",
+        "description": "Rota responsável por listar todos os itens do carrinho",
+        "tags": ["Carrinho"],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Carrinho"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/create-carrinho": {
+      "post": {
+        "summary": "Cadastrar vários itens no carrinho",
+        "description": "Rota responsável por cadastrar vários itens no carrinho",
+        "tags": ["Carrinho"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Carrinho"
+              },
+              "examples": {
+                "Carrinho": {
+                  "value": [
+                    {
+                      "jogoId": "624230fdcd38269205c82197",
+                      "quantidade": 5
+                    },
+                    {
+                      "jogoId": "62423c1e618f4a4738a5ee75",
+                      "quantidade": 2
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Carrinho"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/finish-carrinho": {
+      "delete": {
+        "summary": "Apagar todos os itens do carrinho",
+        "description": "Rota responsável por apagar todos os itens do carrinho",
+        "tags": ["Carrinho"],
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Jogos": {
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "foto": {
+            "type": "string"
+          },
+          "preco": {
+            "type": "number"
+          },
+          "genero": {
+            "type":"string"
+          }
+        }
+      },
+      "Carrinho": {
+        "type": "object",
+        "properties": {
+          "jogoId": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
