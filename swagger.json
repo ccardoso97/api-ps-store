@@ -13,7 +13,7 @@
       "description": "API Local"
     },
     {
-      "url": "https://api-pstore-caio.herokuapp.com/",
+      "url": "https://api-pstore-caio.herokuapp.com",
       "description": "API Heroku"
     }
   ],
