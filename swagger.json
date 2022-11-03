@@ -9,7 +9,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3001/jogos"
+      "url": "http://localhost:3001/jogos",
+      "description": "API Local"
+    },
+    {
+      "url": "https://api-pstore-caio.herokuapp.com/",
+      "description": "API Heroku"
     }
   ],
   "paths": {
